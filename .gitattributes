@@ -1,2 +1,41 @@
-# Auto detect text files and perform LF normalization
+// Auto detect text files and perform LF normalization
 * text=auto
+
+function search(event) {
+  event.preventDefault();
+  let searchInputElement = document.querySelector("#search-input");
+  let cityElement = document.querySelector("#current-city");
+  cityElement.innerHTML = searchInputElement.value.trim(); // Trim whitespace
+}
+
+function formatDate(date) {
+  let minutes = date.getMinutes();
+  let hours = date.getHours();
+  let day = date.getDay();
+
+  if (minutes < 10) {
+    minutes = 0${minutes};
+  }
+  if (hours < 10) {
+    hours = 0${hours};
+  }
+
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ];
+  const formattedDay = days[day];
+  return ${formattedDay} ${hours}:${minutes};
+}
+
+const searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("submit", search);
+
+const currentDateElement = document.querySelector("#current-date"); // Fixed variable name
+const currentDate = new Date();
+currentDateElement.innerHTML = formatDate(currentDate);
